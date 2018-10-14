@@ -5,7 +5,8 @@
 using namespace std;
 
 #define PI 3.14159265
-float x_PAC = 0.0, y_PAC = 0.0, z = 0.0, x_pac_displacment = 0.0;
+float x_PAC = 0.0, y_PAC = 0.0, z = 0.0,\
+ x_pac_displacment = 0.0, angle_PAC = 0.0f;
 int f_mouse_pac = -1;
 float red[] = {1.0f, 0.0f, 0.0f, 0.7f};
 float purple[] = {1.0f, 0.0f, 1.0f, 0.7f};
@@ -24,7 +25,7 @@ void initRendering() {
     glEnable(GL_COLOR_MATERIAL);
 }
 
-void drawMouse(int a, int rotate, float colors[]){
+void drawMouth(int a, int rotate, float colors[]){
     float angle = (180.0/8);
     float main_side = a * sin (angle*PI/180);
     float bisector = a * cos (angle*PI/180);
@@ -137,21 +138,27 @@ void drawGrid(){
 // draw pac-man 
 void drawPac_man(){
     glPushMatrix();
-    
         glTranslated(x_PAC, y_PAC, 0.0f);
+        glRotated(angle_PAC, 0.0f, 0.0f, 1.0f);
         glPushMatrix();
-
+            // body
             drawCircle(5.0f, yellow, -199.0f);
+
+            // eye
             glPushMatrix();
+                if(angle_PAC == 180.0f) {   
+                    glRotated(angle_PAC, 0.0f, 0.0f, 1.0f);
+                }
                 glTranslated(0.0f, 2.0f, 0.0f);
                 drawCircle(1.8f, red, -198.0f);
             glPopMatrix();
-
+            
+            // mouth
             glPushMatrix();
                 x_pac_displacment +=0.2*f_mouse_pac;
                 if(x_pac_displacment > 0.5f || x_pac_displacment <= -4.0f) f_mouse_pac = f_mouse_pac*-1;
                 glTranslated(x_pac_displacment, 0.0f, 0.0f);
-                drawMouse(7.0f, 180.f, black);
+                drawMouth(7.0f, 180.f, black);
             glPopMatrix();
 
         glPopMatrix();
@@ -194,15 +201,19 @@ void handleKeypress(unsigned char key, //The key that was pressed
 		exit(0); //Exit the program
     case 56: // move PAC-MAN up => 8
 		y_PAC += 1.0f; // speed 1.0
+        angle_PAC = -90.0f;
         break;
     case 53: // move PAC-MAN down => 5
 		y_PAC -= 1.0f; // speed 1.0
+        angle_PAC = 90.0f;
         break;
     case 54: // move PAC-MAN right => 6
 		x_PAC += 1.0f; // speed 1.0
+        angle_PAC = 180.0f;
         break;
     case 52: // move PAC-MAN left => 4
 		x_PAC -= 1.0f; // speed 1.0
+        angle_PAC = 0.0f;
         break;
 	}
 }
