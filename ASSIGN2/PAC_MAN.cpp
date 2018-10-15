@@ -1,6 +1,7 @@
 #include <GL/glut.h>  // GLUT, includes glu.h and gl.h
 #include <math.h>
 #include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -18,6 +19,127 @@ float white[] = {1.0f, 1.0f, 1.0f, 0.7f};
 float orange[]= {1.0f, 0.5f, 0.0f,0.7f};     // Orange
 float magenta[]={1.0f, 0.0f, 1.0f,0.7f};     // Magenta
 
+float eat_balls[][3] = {
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { -44.0f, -3.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { -44.0f, -3.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { -44.0f, -3.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { -44.0f, -3.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { -44.0f, -3.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { -44.0f, -3.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { -44.0f, -3.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { -44.0f, -3.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { -44.0f, -3.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+    { 4.0f, 0.0f, 0.0 },
+};
 
 void initRendering() {
 	//Makes 3D drawing work when something is in front of something else
@@ -135,6 +257,38 @@ void drawGrid(){
 }
 
 
+void drawBall(int a, float colors[], float depth){
+    
+    int d = 30;
+    float angle = (180.0/d);
+    float main_side = a * sin (angle*PI/180);
+    float bisector = a * cos (angle*PI/180);
+    for (int i = 0; i < d; ++i) {
+        // glTranslated(x, y, 0.0f);
+        glRotatef((360.0/d), 0.0f, 0.0f, 1.0f);
+
+        glBegin(GL_TRIANGLES); //Begin quadrilateral coordinates
+        // glColor4f(1.0f, 0.0f, 0.0f, 0.7f);
+        glColor4f(colors[0], colors[1], colors[2], colors[3]);
+        glVertex3f(bisector, main_side, depth);
+        glVertex3f(bisector, -1*main_side, depth);
+        glVertex3f(0.0f, 0.0f, depth);
+
+        glEnd(); //End quadrilateral coordinates
+    }  
+
+}
+
+void drawEatBalls(){
+    glPushMatrix();
+    glTranslated(-116.0f, 65.0f, 0.0f);
+    for(int i=0; i<120; ++i){
+        drawBall( 2, green, -195.0f);
+        glTranslated(eat_balls[i][0]*5.38, eat_balls[i][1]*4.9, 0.0f);
+    }
+    glPopMatrix();
+}
+
 // draw pac-man 
 void drawPac_man(){
     glPushMatrix();
@@ -155,8 +309,8 @@ void drawPac_man(){
             
             // mouth
             glPushMatrix();
-                x_pac_displacment +=0.2*f_mouse_pac;
-                if(x_pac_displacment > 0.5f || x_pac_displacment <= -4.0f) f_mouse_pac = f_mouse_pac*-1;
+                x_pac_displacment +=f_mouse_pac;
+                if(x_pac_displacment > 0.2f || x_pac_displacment <= -3.8f) f_mouse_pac = f_mouse_pac*-1;
                 glTranslated(x_pac_displacment, 0.0f, 0.0f);
                 drawMouth(7.0f, 180.f, black);
             glPopMatrix();
@@ -171,6 +325,7 @@ void drawScene() {
 	glMatrixMode(GL_MODELVIEW); //Switch to the drawing perspective
     glLoadIdentity(); //Reset the drawing perspective  
     
+    drawEatBalls();
     drawGrid();
 
     drawPac_man();
@@ -200,19 +355,19 @@ void handleKeypress(unsigned char key, //The key that was pressed
 	case 27: //Escape key
 		exit(0); //Exit the program
     case 56: // move PAC-MAN up => 8
-		y_PAC += 1.0f; // speed 1.0
+		y_PAC += 3.0f; // speed 1.0
         angle_PAC = -90.0f;
         break;
     case 53: // move PAC-MAN down => 5
-		y_PAC -= 1.0f; // speed 1.0
+		y_PAC -= 3.0f; // speed 1.0
         angle_PAC = 90.0f;
         break;
     case 54: // move PAC-MAN right => 6
-		x_PAC += 1.0f; // speed 1.0
+		x_PAC += 3.0f; // speed 1.0
         angle_PAC = 180.0f;
         break;
     case 52: // move PAC-MAN left => 4
-		x_PAC -= 1.0f; // speed 1.0
+		x_PAC -= 3.0f; // speed 1.0
         angle_PAC = 0.0f;
         break;
 	}
